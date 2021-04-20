@@ -37,7 +37,7 @@ After that, the server will be running at http://127.0.0.1:8000/.
 Generate Fake Data Using The Management Command Option
 _____________________________
 
-Optionally, you can run the management command::
+In order to create the first data, you need to run the management command::
 
     $ python manage.py createfakedata
 
