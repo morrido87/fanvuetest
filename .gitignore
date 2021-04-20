@@ -1,0 +1,12 @@
+/venv/*
+
+/static/*
+!/static/.gitkeep
+
+__pycache__/
+.idea/*
+
+db.sqlite3
+
+/media/*
+!/media/.gitkeep
