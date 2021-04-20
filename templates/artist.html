@@ -2,10 +2,16 @@
 {% load i18n static %}
 {% block title %}{% trans "Artist" %} - {{ artist.name }}{% endblock title %}
 {% block content %}
+    <h1>{{ artist.name }}</h1>
+    <h2>{% trans "Albums" %}:</h2>
     <ul>
         {% for album in artist.albums.all %}
             {% with a=album %}
-                <li>{{ a.name }} ({{ a.year }})</li>
+                <li>{{ a.name }} ({{ a.year }}) -
+                    <a href="https://open.spotify.com/search/{{ artist.name }} {{ a.name }}">
+                        {% trans "Search on Spotify" %}
+                    </a>
+                </li>
             {% endwith %}
         {% endfor %}
     </ul>

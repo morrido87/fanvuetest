@@ -2,6 +2,7 @@
 {% load i18n static %}
 {% block title %}{% trans "Artists" %}{% endblock title %}
 {% block content %}
+    <h1>{% trans "Artists in" %} {{ genre.name }} {% trans "Genre" %}</h1>
     <ul>
         {% for artist in genre.artists.all %}
             {% with a=artist %}

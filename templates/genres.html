@@ -2,6 +2,7 @@
 {% load i18n static %}
 {% block title %}{% trans "Genres" %}{% endblock title %}
 {% block content %}
+    <h1>{% trans "Genres" %}</h1>
     <ul>
         {% for genre in genres %}
             <li><a href="{% url "view_genre" genre.id %}">{{ genre.name }}</a></li>
