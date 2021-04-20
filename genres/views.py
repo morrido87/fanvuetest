@@ -23,8 +23,10 @@ class GenresReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
 def genres_view(request):
     genres = Genre.objects.all()
     serializer = GenresSerializer(genres, many=True)
+    genres_counters = Genre.objects.artists_count()
     context = {
-        "genres": serializer.data
+        "genres": serializer.data,
+        "count": genres_counters
     }
     return render(request, template_name='genres.html', context=context)
 

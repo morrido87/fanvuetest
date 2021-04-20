@@ -134,9 +134,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Django Rest Framework
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [],
 }
 
 # CORS Settings
@@ -147,3 +146,8 @@ CORS_ALLOWED_ORIGINS = (
 )
 
 APPEND_SLASH = True
+
+# Media Files / Upload Files
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / "media"

@@ -1,4 +1,7 @@
-from albums.models import Album
+import csv
+from io import StringIO
+
+from albums.models import Album, AlbumBatchFile
 from artists.models import Artist
 from genres.models import Genre
 
@@ -21,3 +24,27 @@ def create_fake_data():
     Album.objects.create(name="In Utero", year=1993, artist=nirvana)
     Album.objects.create(name="21", year=2011, artist=adele)
     Album.objects.create(name="25", year=2015, artist=adele)
+
+
+def process_csv_file(file: AlbumBatchFile):
+    file_data = file.file.read().decode('utf-8')
+    csv_data = csv.reader(StringIO(file_data), delimiter=',')
+
+    line_count = 0
+    for line in csv_data:
+        if line_count > 0:
+            try:
+                genre = Genre.objects.get_or_create(
+                    name=line[4])[0]
+
+                artist = Artist.objects.get_or_create(
+                    name=line[3], genre=genre)[0]
+
+                Album.objects.get_or_create(
+                    name=line[2],
+                    year=line[1],
+                    artist=artist
+                )
+            except Exception as e:
+                pass
+        line_count += 1
