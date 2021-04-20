@@ -1,4 +1,4 @@
-from rest_framework.generics import RetrieveAPIView, ListAPIView
+from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 
 from .models import Album
@@ -11,16 +11,9 @@ class Pagination(PageNumberPagination):
     max_page_size = 100
 
 
-class AlbumDetailView(RetrieveAPIView):
+class AlbumReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = []
 
     queryset = Album.objects.all()
     serializer_class = AlbumsSerializer
-
-
-class AlbumListView(ListAPIView):
-    permission_classes = []
     pagination_class = Pagination
-
-    queryset = Album.objects.all()
-    serializer_class = AlbumsSerializer

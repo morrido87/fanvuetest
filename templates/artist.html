@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% block title %}{% trans "Artist" %} - {{ artist.name }}{% endblock title %}
+{% block content %}
+    <ul>
+        {% for album in artist.albums.all %}
+            {% with a=album %}
+                <li>{{ a.name }} ({{ a.year }})</li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
+{% endblock content %}

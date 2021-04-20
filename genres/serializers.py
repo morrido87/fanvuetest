@@ -1,9 +1,12 @@
 from rest_framework import serializers
 
-from genres.models import Genre
+from artists.serializers import ArtistsSerializer
+from .models import Genre
 
 
 class GenresSerializer(serializers.ModelSerializer):
+    artists = ArtistsSerializer(many=True, read_only=True)
+
     class Meta:
         model = Genre
-        fields = '__all__'
+        fields = ('id', 'name', 'artists')

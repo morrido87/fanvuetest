@@ -1,8 +1,11 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
-from .views import AlbumListView, AlbumDetailView
+from . import views
+
+router = DefaultRouter()
+router.register(r'api', views.AlbumReadOnlyViewSet)
 
 urlpatterns = [
-    path('list', AlbumListView.as_view(), name='list_albums'),
-    path('<int:pk>', AlbumDetailView.as_view(), name="view_album"),
+    path('', include(router.urls)),
 ]

@@ -4,6 +4,7 @@ from .models import Album
 
 
 class AlbumsSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Album
-        fields = '__all__'
+        fields = ('id', 'name', 'year')

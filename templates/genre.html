@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% block title %}{% trans "Artists" %}{% endblock title %}
+{% block content %}
+    <ul>
+        {% for artist in genre.artists.all %}
+            {% with a=artist %}
+                <li><a href="{% url 'view_artist' a.id %}">{{ a.name }}</a></li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
+{% endblock content %}

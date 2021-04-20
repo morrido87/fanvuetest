@@ -16,6 +16,9 @@ class Genre(models.Model):
         editable=False
     )
 
+    class Meta:
+        ordering = ('name',)
+
     def save(self, *args, **kwargs):
         self.updated_at = timezone.localtime()
         super(Genre, self).save(*args, **kwargs)

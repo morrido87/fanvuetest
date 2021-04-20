@@ -14,6 +14,11 @@ class Album(models.Model):
         max_length=50
     )
 
+    year = models.SmallIntegerField(
+        blank=True,
+        null=True
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True,
         editable=False
@@ -22,6 +27,10 @@ class Album(models.Model):
     updated_at = models.DateTimeField(
         editable=False
     )
+
+    class Meta:
+        ordering = ('name',)
+        unique_together = ('artist', 'name')
 
     def save(self, *args, **kwargs):
         self.updated_at = timezone.localtime()

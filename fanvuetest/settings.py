@@ -40,9 +40,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'corsheaders',
-    'genres',
-    'albums',
-    'artists'
+    'api.apps.ApiConfig',
+    'genres.apps.GenresConfig',
+    'albums.apps.AlbumsConfig',
+    'artists.apps.ArtistsConfig'
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,5 @@ CORS_ALLOWED_ORIGINS = (
     "http://127.0.0.1:7995",
     "http://localhost:7995"
 )
+
+APPEND_SLASH = True

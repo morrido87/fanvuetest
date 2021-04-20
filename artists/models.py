@@ -23,6 +23,9 @@ class Artist(models.Model):
         editable=False
     )
 
+    class Meta:
+        ordering = ('name',)
+
     def save(self, *args, **kwargs):
         self.updated_at = timezone.localtime()
         super(Artist, self).save(*args, **kwargs)

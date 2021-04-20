@@ -1,4 +1,5 @@
-from rest_framework.generics import RetrieveAPIView, ListAPIView
+from django.shortcuts import render, get_object_or_404
+from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 
 from .models import Genre
@@ -11,16 +12,26 @@ class Pagination(PageNumberPagination):
     max_page_size = 100
 
 
-class GenreDetailView(RetrieveAPIView):
+class GenresReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = []
 
     queryset = Genre.objects.all()
     serializer_class = GenresSerializer
-
-
-class GenreListView(ListAPIView):
-    permission_classes = []
     pagination_class = Pagination
 
-    queryset = Genre.objects.all()
-    serializer_class = GenresSerializer
+
+def genres_view(request):
+    genres = Genre.objects.all()
+    serializer = GenresSerializer(genres, many=True)
+    context = {
+        "genres": serializer.data
+    }
+    return render(request, template_name='genres.html', context=context)
+
+
+def genre_detail_view(request, pk):
+    genre = get_object_or_404(Genre, pk=pk)
+    context = {
+        "genre": genre
+    }
+    return render(request, template_name='genre.html', context=context)

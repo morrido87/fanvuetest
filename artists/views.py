@@ -1,4 +1,5 @@
-from rest_framework.generics import RetrieveAPIView, ListAPIView
+from django.shortcuts import get_object_or_404, render
+from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 
 from .models import Artist
@@ -11,16 +12,26 @@ class Pagination(PageNumberPagination):
     max_page_size = 100
 
 
-class ArtistDetailView(RetrieveAPIView):
+class ArtistsReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = []
 
     queryset = Artist.objects.all()
     serializer_class = ArtistsSerializer
-
-
-class ArtistListView(ListAPIView):
-    permission_classes = []
     pagination_class = Pagination
 
-    queryset = Artist.objects.all()
-    serializer_class = ArtistsSerializer
+
+def artists_view(request):
+    artists = Artist.objects.all()
+    serializer = ArtistsSerializer(artists, many=True)
+    context = {
+        "artists": serializer.data
+    }
+    return render(request, template_name='artists.html', context=context)
+
+
+def artist_detail_view(request, pk):
+    artist = get_object_or_404(Artist, pk=pk)
+    context = {
+        "artist": artist
+    }
+    return render(request, template_name='artist.html', context=context)

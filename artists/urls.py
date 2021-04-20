@@ -1,8 +1,13 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
-from .views import ArtistListView, ArtistDetailView
+from .views import artists_view, artist_detail_view, ArtistsReadOnlyViewSet
+
+router = DefaultRouter()
+router.register(r'api', ArtistsReadOnlyViewSet)
 
 urlpatterns = [
-    path('list', ArtistListView.as_view(), name='list_artists'),
-    path('<int:pk>', ArtistDetailView.as_view(), name="view_artists"),
+    path('', include(router.urls)),
+    path('view', artists_view, name="list_artists"),
+    path('view/<int:pk>', artist_detail_view, name="view_artist")
 ]

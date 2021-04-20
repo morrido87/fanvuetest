@@ -19,8 +19,14 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 
 urlpatterns = [
+    # Genres
     path('genres/', include('genres.urls')),
+
+    # Albums
     path('albums/', include('albums.urls')),
+
+    # Artists
     path('artists/', include('artists.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()
